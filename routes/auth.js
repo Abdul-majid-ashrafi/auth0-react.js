@@ -23,13 +23,11 @@ router.get('/callback', function (req, res, next) {
     req.logIn(user, function (err) {
       if (err) { return next(err); }
       const returnTo = req.session.returnTo;
-      console.log("callback ", user)
-      // res.send('Auth0 Webapp sample Nodejs');
+      // console.log("callback ", user)
       // going redirect on react app with token
-      res.redirect('http://localhost:4000?token=' + user.accessToken);
-
-      // delete req.session.returnTo;
-      // res.redirect(returnTo || '/user');
+      // res.redirect('http://localhost:4000?token=' + user.accessToken);
+      delete req.session.returnTo;
+      res.redirect(returnTo || '/user');
     });
   })(req, res, next);
 });
